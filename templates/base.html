@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Flaskメモアプリ{% endblock %}</title>
+
+  <!-- ✅ Bootstrap 5 CSS CDN -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-Rw+pW+PCKLe5yzcXRI8l8U6XCln3zXv7g+sx6Ejp7WYRAc+hsbGwDQ4eAHo+6b11"
+    crossorigin="anonymous"
+  >
+</head>
+<body class="container py-4">
+  <header class="mb-4">
+    <h1 class="text-center">Flask メモアプリ</h1>
+    <hr>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ✅ Bootstrap 5 JS CDN -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-G2CENcxckPtD2C0Erzgxkao6y+VOepCM9qZrBFR9G60hAvbZ0AEu8F6c3qDdKvT7"
+    crossorigin="anonymous"
+  ></script>
+</body>
+</html>

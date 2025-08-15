@@ -1,0 +1,29 @@
+<form id="login-form">
+  <input type="text" name="username" placeholder="ユーザー名" required>
+  <input type="password" name="password" placeholder="パスワード" required>
+  <button type="submit">ログイン</button>
+</form>
+
+<script>
+document.getElementById("login-form").addEventListener("submit", async function (e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const res = await fetch("/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: formData.get("username"),
+      password: formData.get("password")
+    })
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    localStorage.setItem("token", data.access_token);
+    alert("ログイン成功");
+    location.href = "/";  // ホームにリダイレクト
+  } else {
+    alert("ログイン失敗");
+  }
+});
+</script>
