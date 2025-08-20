@@ -1,9 +1,27 @@
 services:
+  db:
+    image: postgres:16
+    container_name: memo_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: memo_user
+      POSTGRES_PASSWORD: memo_pass
+      POSTGRES_DB: memo_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
   web:
     build: .
+    env_file: .env
     ports:
       - "5050:5000"
-    volumes:
-      - .:/app
+    # SQLite の instance 永続化は不要になるので削除
+    depends_on:
+      - db
     environment:
-      - FLASK_ENV=development
+      # Flask / SQLAlchemy が接続に使う URL を設定
+      DATABASE_URL: postgresql://memo_user:memo_pass@db:5432/memo_db
+    command: >  
+      sh -c "alembic upgrade head && gunicorn 'app:app' -w 2 -b 0.0.0.0:5000 --threads 4 --access-logfile - --error-logfile -"

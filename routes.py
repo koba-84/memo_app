@@ -83,20 +83,6 @@ def delete(memo_id):
     return redirect(url_for("routes.index"))
 
 
-@routes.route("/register", methods=["GET", "POST"])
-def register():
-    form = RegisterForm()
-    if form.validate_on_submit():
-        existing_user = User.query.filter_by(username=form.username.data).first()
-        if existing_user:
-            flash("このユーザー名はすでに使われています")
-            return redirect(url_for("routes.register"))
-
-        hashed_pw = generate_password_hash(form.password.data)
-        new_user = User(username=form.username.data, password=hashed_pw)
-        db.session.add(new_user)
-        db.session.commit()
-        flash("ユーザー登録が完了しました。ログインしてください。")
-        return redirect(url_for("routes.login"))
-
-    return render_template("register.html", form=form)
+@routes.route("/register", methods=["GET"])
+def register_page():
+    return render_template("register.html")

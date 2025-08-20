@@ -2,11 +2,20 @@ from flask import Flask
 from utils import to_jst
 from api import api
 from flask_jwt_extended import JWTManager
-from flask_jwt_extended.exceptions import JWTExtendedException
+
+# from flask_jwt_extended.exceptions import JWTExtendedException
 from flask import Blueprint, jsonify, request
 from extensions import db, login_manager
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+
+# from flask_sqlalchemy import SQLAlchemy
+# from flask_login import LoginManager
+import logging
+from werkzeug.serving import WSGIRequestHandler
+
+logging.basicConfig(level=logging.DEBUG)
+WSGIRequestHandler.log_request = lambda self, code="-", size="-": logging.info(
+    "%s %s %s %s", self.command, self.path, code, size
+)
 
 
 def create_app():
@@ -44,7 +53,7 @@ def create_app():
     with app.app_context():
         from models import User, Memo, Tag, memo_tags  # ここでモデルをインポート
 
-        db.create_all()  # ここで初期化
+        # db.create_all()  # ここで初期化
 
         # user_loader を init_app の後に定義
         @login_manager.user_loader

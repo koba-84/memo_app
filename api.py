@@ -1,13 +1,13 @@
 from flask import Blueprint, jsonify, request, abort
 from models import db, Memo, User, Tag
 from datetime import datetime
-from werkzeug.security import check_password_hash
 from flask_jwt_extended import (
     create_access_token,
     jwt_required,
     get_jwt_identity,
     JWTManager,
 )
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from datetime import timedelta
 
@@ -156,3 +156,21 @@ def delete_memo(memo_id):
 @jwt_required()
 def test_token():
     return jsonify(msg="トークンは有効です", user_id=get_jwt_identity()), 200
+
+
+@api.route("/register", methods=["POST"])
+def register_api():
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
+
+    existing_user = User.query.filter_by(username=username).first()
+    if existing_user:
+        return jsonify({"error": "ユーザー名は既に存在します"}), 400
+
+    hashed_pw = generate_password_hash(password)
+    new_user = User(username=username, password=hashed_pw)
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({"message": "登録成功"})
