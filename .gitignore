@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Node dependencies
+node_modules/
+
+# Database files
+*.sqlite3
+*.db
+instance/
+pgdata/
+
+# Environment variables
+.env
+.envrc
+
+# SQL dump files
+dump.sql
+
+# IDE / Editor specific
+.vscode/
+.idea/
