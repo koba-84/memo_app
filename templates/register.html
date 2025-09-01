@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="{{ get_locale() }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>新規登録</title>
+  <title>{{ _("新規登録") }}</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light d-flex align-items-center justify-content-center vh-100">
 
   <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
-    <h2 class="text-center mb-4">新規登録</h2>
+    <h2 class="text-center mb-4">{{ _("新規登録") }}</h2>
     <form id="register-form">
       <div class="mb-3">
-        <label for="username" class="form-label">ユーザー名</label>
+        <label for="username" class="form-label">{{ _("ユーザー名") }}</label>
         <input type="text" class="form-control" id="username" name="username" required>
       </div>
       <div class="mb-3">
-        <label for="password" class="form-label">パスワード</label>
+        <label for="password" class="form-label">{{ _("パスワード") }}</label>
         <input type="password" class="form-control" id="password" name="password" required>
       </div>
       <div class="mb-3">
-        <label for="password2" class="form-label">パスワード（確認）</label>
+        <label for="password2" class="form-label">{{ _("パスワード（確認）") }}</label>
         <input type="password" class="form-control" id="password2" name="password2" required>
       </div>
-      <button type="submit" class="btn btn-success w-100">登録する</button>
+      <button type="submit" class="btn btn-success w-100">{{ _("登録する") }}</button>
     </form>
 
     <hr class="my-4">
     <div class="text-center">
-      <p class="mb-2">すでにアカウントをお持ちですか？</p>
-      <a href="/login" class="btn btn-outline-secondary w-100">ログインへ</a>
+      <p class="mb-2">{{ _("すでにアカウントをお持ちですか？") }}</p>
+      <a href="/login" class="btn btn-outline-secondary w-100">{{ _("ログインへ") }}</a>
     </div>
   </div>
 

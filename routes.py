@@ -1,4 +1,12 @@
-from flask import render_template, redirect, url_for, flash, request, Blueprint
+from flask import (
+    render_template,
+    redirect,
+    url_for,
+    flash,
+    request,
+    Blueprint,
+    make_response,
+)
 from flask_login import login_user, logout_user, login_required, current_user
 from models import User, Memo, Tag, memo_tags
 from forms import LoginForm, MemoForm, RegisterForm
@@ -41,7 +49,6 @@ def login():
 
 
 @routes.route("/logout")
-@jwt_required()
 def logout():
     logout_user()
     return redirect(url_for("routes.login"))
@@ -86,3 +93,15 @@ def delete(memo_id):
 @routes.route("/register", methods=["GET"])
 def register_page():
     return render_template("register.html")
+
+
+@routes.route("/set-lang/<locale>")
+def set_lang(locale):
+    from flask import current_app  # サポート言語の確認用
+
+    supported = current_app.config.get("BABEL_SUPPORTED_LOCALES", ["ja", "en"])
+    if locale not in supported:
+        locale = current_app.config.get("BABEL_DEFAULT_LOCALE", "ja")
+    resp = make_response(redirect(request.referrer or url_for("routes.index")))
+    resp.set_cookie("lang", locale, max_age=60 * 60 * 24 * 365)
+    return resp

@@ -16,10 +16,10 @@ cd "/Users/ryoma/Desktop/study/leetcode/memo_app"
 docker compose up -d
 
 # 5. アプリが応答するまで待機
-while ! curl -s http://127.0.0.1:5050 > /dev/null; do
+while ! curl -s http://127.0.0.1:5000 > /dev/null; do
     echo "Waiting for app to be ready..."
     sleep 1
 done
 
 # 6. ブラウザで開く
-open "http://127.0.0.1:5050"
+open "http://localhost:5000"

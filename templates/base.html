@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="{{ get_locale() }}">
 <head>
   <meta charset="UTF-8">
-  <title>{% block title %}Flaskメモアプリ{% endblock %}</title>
+  <title>{% block title %}{{ _("Flask メモアプリ") }}{% endblock %}</title>
 
   <!-- ✅ Bootstrap 5 CSS CDN -->
   <link
@@ -14,7 +14,14 @@
 </head>
 <body class="container py-4">
   <header class="mb-4">
-    <h1 class="text-center">Flask メモアプリ</h1>
+    <h1 class="text-center">{{ _("Flask メモアプリ") }}</h1>
+
+    <div class="btn-group">
+      <a class="btn btn-outline-secondary btn-sm"
+         href="{{ url_for('routes.set_lang', locale='ja') }}">日本語</a>
+      <a class="btn btn-outline-secondary btn-sm"
+         href="{{ url_for('routes.set_lang', locale='en') }}">English</a>
+    </div>
     <hr>
   </header>
 

@@ -12,3 +12,9 @@ class Config:
     JWT_TOKEN_LOCATION = ["headers"]
     JWT_HEADER_NAME = "Authorization"
     JWT_HEADER_TYPE = "Bearer"
+    # ローカライズ設定
+    BABEL_DEFAULT_LOCALE = "ja"
+    BABEL_DEFAULT_TIMEZONE = "Asia/Tokyo"
+    LANGUAGES = ["en", "ja"]
+    BABEL_TRANSLATION_DIRECTORIES = "translations"
+    BABEL_DOMAIN = "messages"
